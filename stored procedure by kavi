@@ -1,0 +1,81 @@
+create table manipalhospital(patientid int identity not null,name varchar(250),aptime datetime,doctorname varchar(250))
+
+
+
+SELECT * FROM manipalhospital
+
+insert into manipalhospital(name,aptime,doctorname) values('rose','20190228 02:30:000','Dr.ajay'),('kia','20190228 03:30:000','Dr.ajay'),('david','20190228 04:00:000','Dr.ajay')
+
+
+insert into manipalhospital(amntpaid) values('payed'),('notpayed'),('payed'),('payed'),('payed'),('notpayed'),('payed'),('notpayed'),('payed'),('payed'),('payed'),('payed'),('payed'),('payed')
+
+--select * from manipalhospital
+--select * from manipalhospitals
+
+
+alter procedure manipalappointments (
+@id int,
+@name varchar(250),
+@aptime datetime,
+@doctorname varchar(250),
+@condition nvarchar(250) = ''
+)
+as 
+begin
+	if @condition='select'
+begin
+	select * from manipalhospital
+end
+	if @condition='insert'
+begin
+		insert into manipalhospital(patientid,name,aptime,doctorname) values(@id,@name,@aptime,@doctorname)
+end
+	if @condition='update'
+begin
+		update manipalhospital set name=@name,aptime=@aptime,doctorname=@doctorname where patientid=@id
+end
+	else if @condition='delete'
+begin
+		delete from manipalhospital where patientid=@id
+end
+end
+
+exec manipalappointments 10,'james','20190228 10:00:00','Dr.','update'
+
+
+--SET IDENTITY_INSERT manipalhospital Off
+
+
+
+alter procedure manipalappointments (@condition varchar(255))
+as
+declare
+@id int,
+@name varchar(250),
+@aptime datetime,
+@doctorname varchar(250),
+@amntpaid varchar(250),
+@count varchar(250);
+set @id=1;
+set @count=(select count(*) from manipalhospital)
+
+while(@id<=@count)
+begin
+	if @condition='payed'
+begin
+		select @name=name from manipalhospital (NOLOCK) where patientid=@id and amntpaid=@condition
+		print @name + '->' + 'appointment confirmed'
+end
+	else if @condition='notpayed'
+begin
+		set @name= (select name from manipalhospital where patientid=@id and amntpaid=@condition)
+		set @aptime= (select aptime from manipalhospital where patientid=@id and amntpaid=@condition)
+		set @doctorname= (select name from manipalhospital where patientid=@id and amntpaid=@condition)
+		print @name + '->'+'not appointment confirmed'
+  end
+		set @id=@id+1;
+ end
+
+ exec manipalappointments 'notpayed'
+ 
+ --if @condition='inner join' begin select manipalhospital.name,manipalhospitals.amntpaid,manipalhospital.aptime,manipalhospital.doctorname from manipalhospital inner join manipalhospitals on manipalhospital.patientid=manipalhospitals.patientidend
