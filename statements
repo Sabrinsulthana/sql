@@ -1,0 +1,74 @@
+create table srecord(id int,name varchar(250));
+
+select * from srecord;
+
+alter table srecord
+add result varchar(250);
+
+insert into srecord (id,name) values(1,'sab'),(2,'kav'),(3,'abc');
+update srecord set result='pass' where id=4
+go
+
+--ifelse
+alter procedure srecords(@id int,@name varchar(250),@result varchar(250))
+as
+begin
+		if not exists (select id from srecord where id=@id)
+	begin
+		insert into srecord values(@id,@name,@result)
+		print 'new record inserted'
+	end
+		else
+	begin
+		print 'already exit'
+	end
+end
+
+ exec srecords 1,'sab','pass'
+ go
+ --case when
+ alter procedure srecords(@name varchar(250))
+ as
+	begin
+		select case (@name)
+		     when 'sab' then 'match'
+			 when 'kav' then 'match'
+			 when 'abc' then 'match'
+			 when 'priya' then 'match'
+		 else 'unknown' 
+  end
+  end
+ exec srecords 'lp'
+
+
+
+ 
+ --case while
+
+alter procedure srecords(@condition varchar(255))
+as
+Declare @id int,@name varchar(255),@count varchar(255),@result varchar(255);
+set @id=1;
+Set @count = (Select Count(*) from srecord)
+while (@id<=@count)
+	begin
+		if @condition = 'Pass'
+			Set @name = (Select [name] from srecord where id = @id and result = @condition)
+			Set @result = (Select result from srecord where id = @id and result = @condition)
+			print @name+'->'+@result
+
+		if @condition = 'fail'
+	Begin
+				Set @name = (Select name from srecord where id = @id and result = @condition)
+				Set @result = (Select result from srecord where id = @id and result = @condition)
+				print @name+'->'+@result
+			End
+	set @id=@id+1
+	end
+  exec srecords @condition ='pass'
+
+
+
+
+
+
