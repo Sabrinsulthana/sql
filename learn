@@ -1,0 +1,236 @@
+   			SQL Learning 
+
+26/2/2019
+
+SQL:
+ 
+  *Structure query language is used for accessing and manipulating the database.
+  * SQL keyword are NOT case sensitive. we write all the keywords in "UPPER CASE".
+  * Foo refers to the placeholder and it can be changing the value based on the programming.
+	*---> refers to the operator WHERE clause to perform operations. 
+		and to specify the consitions.	
+RDBMS:
+   Relational DBMS is the basis for all the sql modern database system as MS SQL SERVER ,
+IBM like oracle.
+
+
+	* Execute 
+	* Retrieve
+	* Insert
+	* Update
+	* Delete
+	* Create
+	* Set Table and procedure and views
+
+	SELECT - extracts data from a database
+	UPDATE - updates data in a database
+	DELETE - deletes data from a database
+	INSERT INTO - inserts new data into a database
+	CREATE DATABASE - creates a new database
+	ALTER DATABASE - modifies a database
+	CREATE TABLE - creates a new table
+	ALTER TABLE - modifies a table
+	DROP TABLE - deletes a table
+	CREATE INDEX - creates an index (search key)
+	DROP INDEX - deletes an index
+
+Table:
+    The data stored in database objects called "TABLES".
+ 	
+    * A table is a collection of related data entries and it consists of columns and rows.
+    * Tables contain records (rows) with data.
+
+
+Eg: SELECT * FROM customeres.
+
+DATABASE:
+   The database most often contains one r more tables
+
+  sabrin I am going to create a Table which names the Family.
+   then inside the records found which is family members
+
+
+ 1.SELECT :
+   SELECT family id FROM family;
+
+  suppose we need to find the full family details  we need to give this syntax.
+  Eg: SELECT * FROM family;
+ 
+  Then suppose I need to get the particular details from the table so i need to create a 
+    SELECT family id, family names FROM family;
+   sabrin may i include the country details 
+
+2. SELECT DISTINCT country From family;
+	
+	SQL WHERE Clause
+ 		
+	SELECT family id,family names from family WHERE 1;
+	SELECT * From Family WHERE Country="Mexico";
+
+	SQL AND OR NOT operators:
+
+3. AND: For True all conditions are true
+
+      SELECT family ID,family name FROM family WHERE familyID=1 AND familyID=2;
+	 
+      Example: SELECT * FROM family WHERE familyID="1" and familyname="germany";
+
+
+4. OR: separated by any one of the conditions is true
+
+	SELECT * FROM Family WHERE familyID=1 or FamilyID=2;
+
+5. NOT: separated by NOT occur the condition 
+   SELECT familyID,familyname * FROM family WHERE NOT familyID;
+
+ eg: SELECT * FROM family WHERE NOT familyId=1 AND NOT familyId=2;
+
+
+6. If you want to order by the alphabetic order user ORDER BY
+	SELECT * FROM family ORDER BY name;
+ 
+7. INSERT INTO:
+   * it is used to insert new record in a table and mainly include the VALUES keyword.
+
+	INSERT INTO family (column1,column2,column3) VALUES (value1,value2,value3,...);
+
+8. NULL Operator
+   
+		SELECT Familyid,familyname from family WHERE Address IS NULL;
+		
+		eg:SELECT * FROM customers WHERE customerdetails IS NULL;
+  
+9.UPDATE:
+
+	The main syntax of update is
+
+	-->UPDATE table_name SET column1 = value1, column2 = value2, ...WHERE condition;
+     		
+		UPDATE family SET familyaddress=1, familycountry=2, WHERE family;
+	
+  	 If I want to insert multiple records to add
+
+		**UPDATE family SET familyname="hii" WHERE Country="hungary";
+
+10. DELETE:
+	
+	DELETE FROM family WHERE familyId=1;
+
+11.SQL TOP, LIMIT or ROWNUM Clause
+
+	SELECT TOP is used to specify the number of records to return.
+	
+       Eg: SELECT  TOP number | Percent column_name FROM family WHERE familyid=1 LIMIT number;
+ 	
+	i)SELECT TOP 3 * FROM Family;
+	ii) SELECT * FROM family LIMIT 3;
+	iii) SELECT * FROM family WHERE ROWNUM <=3;
+
+	SELECT TOP 50 PERCENT *
+
+
+27/02/2019
+
+
+12. JOINS:
+    
+   inner join---> records that have matched values n both of the tables.
+   syntax:
+	
+    sabrin for your reference this syntax is much better for you.
+	*here the columnname is which matches for the table is required.
+
+    select tablename1.columnname1,tablename2.columnname2 from tablename1 inner join tablename2 on tablename1.columnname=tablename2.columnname;
+
+    Eg program:
+
+
+
+	create table sab1(sbid int, sbname varchar(250),sbmark varchar(250));
+
+	select * from sab1;
+	select * from sab2;
+
+	insert into sab1(sbid,sbname,sbmark) values(1,'was',150),(2,'sab',200),(3,'sel',150);
+
+	create table sab2(said int, saname varchar(250),sabmark varchar(250));
+
+	select * from sab2;
+
+	insert into sab2(said,saname,sabmark) values (1,'eem',150),(4,'noor',200),(5,'pri',250);
+
+	update sab1 set sbname='sabrin' where  sbid=2;
+
+	update sab2 set sabmark=200 where said=1;
+
+	select sab1.sbname,sab2.saname from sab1 inner join sab2 on sab1.sbname=sab2.saname;
+
+13.UNION and GROUP
+
+     union is used to.... for your reference combination of two tables 
+     must have the same number of columns...
+	
+	SYNTAX:
+		SELECT column_name(s) from table1 UNION SELECT column_name from table2;
+		SELECT column_name(s) from table1 UNION ALL SELECT column_name from table2;
+
+14.LIKE syntax:
+	
+	---> % refers to zero,one or multiple characters.
+	---> _ represents single character.
+15.COUNT()
+    SELECT COUNT(column_name) from table_name where condition;
+
+16.AVG()
+      SELECT AVG(column_name) from table_name where condition;
+
+
+17. SUM()
+
+ select sum(column_name) from table_name where condition;
+
+
+18. UNIQUE:
+	the unique constraint ensures that all the values in a column are different.
+
+        
+    create table sabrin (id int not null unique,lastname varchar(255) not null,age int);
+
+19.DATE: 
+	select today = CONVERT(char(20),getdate());
+
+
+
+TASK FOR THE GENIOUS:
+	****https://ramkedem.com/en/practice-sql-nested-queries/
+	
+ 	****https://www.c-sharpcorner.com/UploadFile/f0b2ed/pivot-and-unpovit-in-sql-server/
+
+
+
+28/02/2019
+
+stored procedure:
+
+	It is used to store the program we processing the insert, update and delete.
+	* accept input parameters and return multiple values in the form of output parameters to the calling procedure or batch.
+	* contain program statements that including the operations in a database.
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
