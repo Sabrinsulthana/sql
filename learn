@@ -389,25 +389,78 @@ BEGIN
 END
 
 EXEC myc11 2,'fidas',200,'canada','update';
-	
-	
-	
-
-    
 
 
+conditional statements:
+
+syntax:
+
+refer link: "http://doc.nuodb.com/Latest/Content/SQL-Procedural-Conditional-Statements.htm"
+
+IF ( sql_boolean_expression | sql_query_statement ) 
+    sql_code_block 
+    [ ELSE sql_code_block ] 
+END_IF;
+
+WHILE ( sql_boolean_expression | sql_query_statement ) 
+    sql_code_block 
+END_WHILE;  
+
+TRY sql_code_block 
+    CATCH(error_variable) 
+    sql_code_block 
+END_TRY;       
+
+[ [ VAR ] var_name var_type [ , var_name var_type ]... = ] 
+    CASE input_expression 
+        WHEN (when_expression) THEN result_expression 
+        [ WHEN (when_expression) THEN result_expression ]...
+        [ ELSE result_expression ] 
+    END;
 
 
 
+WHEN CASE usage:
+
+create procedure resj(@mname varchar(250))
+as
+begin
+	select case (@mname)
+	when 'sabrin' then 'match'
+	when 'sulthana' then 'match'
+	when 'kavipriya' then 'match'
+	else 'unknown'end
+end
+exec resj 'sabrin'
 
 
 
+DATE :
+ sabrin put the syntax for 
+ ---->DATETIME DEFAULT GETDATE()
+ 
+ while condition statement:
+ 
+alter procedure srecords(@condition varchar(255))
+as
+Declare @id int,@name varchar(255),@count varchar(255),@result varchar(255);
+set @id=1;
+Set @count = (Select Count(*) from srecord)
+while (@id<=@count)
+	begin
+		if @condition = 'Pass'
+			Set @name = (Select name from srecord where id = @id and result = @condition)
+			Set @result = (Select result from srecord where id = @id and result = @condition)
+			print @name+'->'+@result
 
-
-
-
-
-
-
-
-
+		if @condition = 'fail'
+			Begin
+				Set @name = (Select name from srecord where id = @id and result = @condition)
+				Set @result = (Select result from srecord where id = @id and result = @condition)
+				print @name+'->'+@result
+			End
+	set @id=@id+1
+	end
+  exec srecords @condition ='pass'
+ 
+ 
