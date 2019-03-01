@@ -215,6 +215,183 @@ stored procedure:
 	It is used to store the program we processing the insert, update and delete.
 	* accept input parameters and return multiple values in the form of output parameters to the calling procedure or batch.
 	* contain program statements that including the operations in a database.
+	
+	
+	
+
+""""""Stored procedures use parameters mapping concept""""""
+    
+step1:
+
+CREATE TABLE studbs(rid int,rname varchar(200),rfees float)
+
+SELECT * FROM studbs;
+
+create procedure insertDatass
+
+(@RollNo int,
+
+@Name varchar(50),
+
+@Fees float)
+
+as
+
+begin
+
+insert into studbs values(@RollNo,@Name,@Fees)
+
+select * from studbs
+
+update studbs set rname=@Name where rid=@RollNo;
+
+end
+
+EXEC insertDatass 5,'bvc',55,'insert'
+
+
+STEP:2
+
+
+CREATE PROCEDURE stus(@rid int,@rname varchar(200),@rfees float,@condition varchar(500)='')
+
+AS
+
+BEGIN
+
+IF @condition='INSERT'
+
+BEGIN
+
+INSERT INTO studbs values(@rid,@rname,@rfees)
+
+END
+ 
+IF @condition='SELECT'
+
+BEGIN
+
+SELECT * FROM studbs
+
+END
+
+END
+
+EXEC stus 1,'was',50,'select'
+
+
+step 3:
+
+ ""+++MAy be useful+++""
+create table myshop(mid int,mname varchar(500),mprd varchar(500))
+
+select * from myshop
+
+create procedure myshopc(@mid int,@mname varchar(50),@mprd varchar(500))
+
+as
+
+begin
+
+insert into myshop values(@mid,@mname,@mprd)
+
+select * from myshop
+
+end
+
+exec myshopc 1,'nhm',50
+
+
+1/3/2019:
+
+Trigger program
+
+**create table studentsz(id varchar(20),name varchar(250),mark1 varchar(150),mark2 varchar(200),mark3 varchar(250))
+
+--truncate table studentsz;
+--drop table studentszfinal;
+
+
+insert into studentsz(id,name,mark1,mark2,mark3) values(1,'kavi',78,89,67),(2,'priya',90,87,76),(3,'sabrin',100,100,97)
+update studentsz set
+
+
+create table studentszfinal(id varchar (20),name varchar(250),total varchar(250),per varchar(250))
+select * from studentszfinal
+go
+
+alter trigger studentsztrigger on studentsz
+for insert
+as
+declare @sid varchar(20);
+declare @sname varchar(250);
+declare @total varchar(150);
+declare @per varchar(200);
+
+select @sid= i.id,
+	   @sname= i.name,
+	   @total= (i.mark1 + i.mark2 + i.mark3),
+	   @per= ((i.mark1+i.mark2+i.mark3)/3) from inserted i;
+insert into studentszfinal (id,name,total,per) values (@sid,@sname,@total,@per)
+go
+
+insert into studentszfinal (id,name,total,per) values (3,'sabrin',(100+100+97),(100+100+97)/3)
+
+
+using if else -if program "MINE":
+CREATE TABLE mys1(m1id integer NOT NULL PRIMARY KEY,m1name varchar(500),m1cst float,mcity varchar(250))
+
+--DROP TABLE mys1
+SELECT * FROM mys1;
+
+INSERT INTO mys1(m1id,m1name,m1cst,mcity) VALUES (1,'sab',25,'brazil'),(2,'fidas',50,'france'),(3,'kavi',75,'america');
+
+go
+
+ALTER PROCEDURE myc11(@m1id int,@m1name varchar(500),@m1cst float,@mcity varchar(250),@condition varchar(500)='')
+
+AS 
+
+BEGIN
+
+	IF @condition='insert'
+
+	BEGIN
+
+		INSERT INTO mys1(m1id,m1name,m1cst,mcity) VALUES(@m1id,@m1name,@m1cst,@mcity)
+
+	END
+
+	IF @condition='SELECT'
+
+	BEGIN
+
+		SELECT * FROM mys1
+
+	END
+ 
+	IF @condition='update'
+
+	BEGIN
+
+		update mys1 set m1cst=@m1cst,mcity=@mcity where @m1id=m1id;
+		
+	END
+
+	else IF @condition='DELETE'
+	
+	BEGIN
+		DELETE FROM mys1 where @m1cst=m1cst;
+	END
+
+
+
+END
+
+EXEC myc11 2,'fidas',200,'canada','update';
+	
+	
+	
 
     
 
