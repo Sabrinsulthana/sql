@@ -1,0 +1,54 @@
+--cursor
+
+create table ttkt(tid integer primary key,tname varchar(250),tfrom varchar(250),tto varchar(250) NOT NULL,tcst varchar(250),tbkng varchar(250))
+
+select * from ttkt;
+--drop table ttkt;
+
+insert into ttkt(tid,tname,tfrom,tto,tcst,tbkng) values(1,'xprss','chennai','calicut',150,'confirmed'),(2,'sadhapthi','hyderabad','bangalore',150,'reserved'),(3,'chennai','coimbatore','salem',200,'not reserved')
+
+go
+
+--SET NOCOUNT on
+
+	DECLARE @tid int
+	DECLARE @tname varchar(300)
+	DECLARE @tfrom varchar(300)
+	DECLARE @tto varchar(300)
+	DECLARE @tcst varchar(250)
+	DECLARE @tbkng varchar(250)
+	DECLARE ttbkng CURSOR 
+		static for
+		select tid,tname,tfrom,tto,tcst,tbkng from ttkt
+
+		open ttbkng
+
+		if @@CURSOR_ROWS >0
+		begin
+		fetch next from ttbkng into @tid,@tname,@tfrom,@tto,@tcst,@tbkng 
+
+		while @@FETCH_STATUS =0
+
+		begin
+
+		print 'tid: '+convert(varchar(20),@tid)+', tname: '+@tname+',tfrom: '+@tfrom+', tto: '+@tto+', tcst:'+ convert(varchar(20),@tcst)+',tbkng:'+@tbkng+''
+		fetch next from ttbkng into  @tid,@tname,@tfrom,@tto,@tcst,@tbkng 
+		end
+
+		end
+		close ttbkng
+		deallocate ttbkng
+
+		--set nocount off
+
+
+
+
+
+
+
+
+
+
+
+
