@@ -1,0 +1,31 @@
+create table studt(sid integer NOT NULL,sname varchar(250),smark1 varchar(200),smark2 varchar(200),smark3 varchar(200))
+
+select * from studt;
+
+--drop table studt;
+
+insert into studt(sid,sname,smark1,smark2,smark3) values(1,'sab',150,150,150),(2,'kav',150,170,200),(3,'kousy',180,190,200),(4,'maha',190,200,200)
+
+create table studrank(sid int,sname varchar(350),stot varchar(600),sperc1 varchar(250))
+
+select * from studrank;
+--drop table studrank;
+go
+
+alter trigger studtrigger on studt 
+for insert
+as
+	declare @sid int;
+	declare @sname varchar(350);
+	declare @stot varchar(600);
+	declare @sperc1 varchar(250);
+
+select @sid=i.sid, 
+	   @sname=i.sname,
+	   @stot=(i.smark1+ i.smark2 + i.smark3),
+	   @sperc1=((i.smark1+i.smark2+i.smark3)/3) from inserted i;
+	   insert into studrank(sid,sname,stot,sperc1) values (@sid,@sname,@stot,@sperc1)
+	   go
+
+
+insert into studrank(sid,sname,stot,sperc1) values(2,'kav',(150+170+200),(150+170+200)/3)
