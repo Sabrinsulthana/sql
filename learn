@@ -577,12 +577,13 @@ SqlQueries:
 	SELECT * FROM BOOKs RIGHT OUTER JOIN Authors ON BOOKs.AuthorID = Authors.AuthorID
 
  Pivot table:
- 
- 
- 
- 
- 
- 
- 
- 
- 
+ SELECT first_column AS <first_column_alias>,
+[pivot_value1], [pivot_value2], ... [pivot_value_n]
+FROM 
+(<source_table>) AS <source_table_alias>
+PIVOT 
+(
+ aggregate_function(<aggregate_column>)
+ FOR <pivot_column>
+ IN ([pivot_value1], [pivot_value2], ... [pivot_value_n])
+) AS <pivot_table_alias>;
