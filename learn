@@ -439,6 +439,9 @@ DATE :
  sabrin put the syntax for 
  ---->DATETIME DEFAULT GETDATE()
  
+ 
+ 
+ 
  while condition statement:
  
 alter procedure srecords(@condition varchar(255))
@@ -462,5 +465,124 @@ while (@id<=@count)
 	set @id=@id+1
 	end
   exec srecords @condition ='pass'
+ 4/03/2019:
+ CURSOR: https://www.dotnettricks.com/learn/sqlserver/sql-server-different-types-of-cursors
+
+ 	1.static server
+	2.dynamic server
+	3.forward only cursor
+	4.keyset driven cursor
+
+
+	*cursor is used to update the values row by row
+	* fetch the record by record
+
+	The steps to perform cursor:
+		1.declare
+		2.open
+		3.fetch has various types.
+			i) NEXT
+			ii)PRIOR
+			iii)FIRST
+			iv)LAST
+			v)ABSOLUTE
+			vi)RELATIVE
+
+		4.process
+		5.close
+		6.deallocate
+
+
+cursor program:
+
+Declare @tid,
+Declare cursorname cursor
+
+dynamic for 
+
+select tid from tablename
+
+open cursor_name
+
+if @@Cursor_rows >0 //
+fetch next from cursorname into tid
+
+while @@fetch_status = 0
+
+5/03/2019/ Tuesday 
+ 
+completed trigger
+
+6/3/2019/Wednesday
+
+looping in win automation:
+
+loop
+display message
+end loop
+
+
+Image OCR:
+
+step1: launch the browser watever it may be
+step2: send keys 
+	eg: keystrokes like Desktop Automation to the active window.
+step3: {Enter} the active window
+step 4: Get mouse position 
+step 5: create Tesseract OCR Engine
+%OCREngine%
+
+step6: wait 6
+step7:move mouse to text on screen(OCR)
+ like desktop automation 
+step 8: move mouse to image....
+
+
+07/03/2019 thursday
+ completed the development and management course for that certificate purpose.
+
+
+08/13/2019
+subqueries:
+	A subquery is a SELECT statement (i.e) nested within another T-SQL statement.
+	A subquery is also called an inner query.
+	***subquery cannot contain a ORDER-BY clause.***
+	A query can contain more than one sub-query usually contain the WHERE clause.
+
+ very important link***https://www.w3resource.com/sql/subqueries/understanding-sql-subqueries.php ****
+
+subqueries must be enclosed with paranthesis
+
+(SELECT [DISTINCT] subquery_select_argument
+FROM {table_name | view_name}
+{table_name | view_name} ...
+[WHERE search_conditions]
+[GROUP BY aggregate_expression [, aggregate_expression] ...]
+[HAVING search_conditions]
+)
+
+
+SqlQueries:
+
+	left outer join(*=)
+	right outer join(=*)
+	full outer join
+
+	***SELECT * FROM Authors, BOOKs WHERE Authors.AuthorID *= BOOKs.AuthorID ***
+
+
+    right outer join ----> ***SELECT * FROM BOOKs, Authors WHERE BOOKs.AuthorID =* Authors.AuthorID ***
+
+	SELECT * FROM Authors LEFT OUTER JOIN BOOKs ON Authors.AuthorID = BOOKs.AuthorID
+	SELECT * FROM BOOKs RIGHT OUTER JOIN Authors ON BOOKs.AuthorID = Authors.AuthorID
+
+ Pivot table:
+ 
+ 
+ 
+ 
+ 
+ 
+ 
  
  
