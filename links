@@ -7,3 +7,15 @@ https://www.janbasktraining.com/blog/create-stored-procedure-trigger-sql-server/
 https://www.mindstick.com/Blog/354/checking-if-else-condition-in-stored-procedure-sql-server
 http://doc.nuodb.com/Latest/Content/SQL-Procedural-Conditional-Statements.htm
 **https://docs.microsoft.com/en-us/sql/t-sql/language-elements/else-if-else-transact-sql?view=sql-server-2017**
+
+
+
+sql server 2008 r2 link
+9
+
+A link where you can directly download Microsoft® SQL Server® 2008 R2 SP2 - Express Edition without clicking any button is as follows: 
+For 32 Bit: 
+http://download.microsoft.com/download/0/4/B/04BE03CD-EAF3-4797-9D8D-2E08E316C998/SQLEXPR_x86_ENU.exe
+
+For 64 Bit:
+http://download.microsoft.com/download/0/4/B/04BE03CD-EAF3-4797-9D8D-2E08E316C998/SQLEXPR_x64_ENU.exe
