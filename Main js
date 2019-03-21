@@ -1,0 +1,21 @@
+function asd()
+{
+ var o = '';
+var counT = document.getElementsByClassName('table container')[0].getElementsByTagName('tr').length;
+for (var i =0 ; i < counT; i++)
+{
+	for(var j = 0; j < 5; j++)
+	{
+		if(i == 0)
+		  var n = document.getElementsByClassName('table container')[0].getElementsByTagName('tr')[i].getElementsByTagName('th')[j].innerText;
+		else
+	      var n = document.getElementsByClassName('table container')[0].getElementsByTagName('tr')[i].getElementsByTagName('td')[j].innerText;
+		 if(j == 0)	
+         o = o + n;
+         else
+	     o = o + ',' + n;
+	}
+	o = o + '\n';
+}
+   return o;
+}
