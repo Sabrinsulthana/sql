@@ -1,0 +1,13 @@
+document.getElementsByTagName('p')[8].remove();
+
+var btns = document.createElement('button');
+
+btns.id = 'clip-options-save';
+
+btns.className = 'btn btn-primary';
+
+btns.innerText='Clip & Save';
+
+document.getElementsByClassName('popover-content')[0].appendChild(btns);
+
+document.getElementById('clip-options-save').click()
